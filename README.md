@@ -1,5 +1,10 @@
 # GUIRPG
 
+### Créer le fichier mainProd.js
+
+npm install -g watchify
+watchify mainDev.js -o main.js
+
 ### Histoire et idées en vrac :
 - **n0** : enfermé dans une cage, écran completement noir
     - echappé du donjon, perdu dans la nature
