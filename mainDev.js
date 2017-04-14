@@ -9,4 +9,4 @@ var oPlayerTest = new PlayerTest();
 
 //GAME
 var oPlayer1 = new Player();
-oPlayer1.attack();
+//oPlayer1.attack();

@@ -4,6 +4,10 @@ class Player {
         console.log("paf");
     }
 
+    ok() {
+        return true;
+    }
+
 }
 
 module.exports = Player;
