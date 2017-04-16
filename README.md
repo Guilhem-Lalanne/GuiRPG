@@ -1,6 +1,6 @@
 # GUIRPG
 
-### Créer le fichier mainProd.js
+### Créer le fichier main.js
 
 	npm install -g watchify
 
