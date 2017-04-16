@@ -16,12 +16,17 @@ class PlayerTest {
             });
 
             describe('Test player class', function() {
-                it('player ok function return true', function() {
 
-                    var oPlayer1 = new Player();
-                    oPlayer1.attack();
-                    chai.assert.isOk(oPlayer1.ok, 'everything is ok');
+                var oPlayerTest = new Player();
+
+                it('ok function return true', function() {
+                    chai.assert.isOk(oPlayerTest.ok, 'everything is ok');
                 });
+
+                it('pv du joueur superieur à 0', function() {
+                    chai.assert.isAbove(oPlayerTest.hp,0);
+                });
+
             });
 
         mocha.run();
