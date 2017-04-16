@@ -2,10 +2,6 @@
 
 ### Créer le fichier mainProd.js
 
-	npm install -g mocha
-	
-	npm install -g chai
-
 	npm install -g watchify
 
 	watchify mainDev.js -o main.js
@@ -95,9 +91,9 @@ Dans le village :
 	- Si légume mangé : PV++
 	- Si Attaque < 0
 	- Si Attaque > max
+	- Si Magie < 0 (a supprimer ?)
+	- Si Magie > max (a supprimer ?)
 	- Si Magie (cooldown) > 0 : impossible de lancer un sort
-	- Si Magie > max
-	- Si Magie < 0
 	- Si XP < nb : impossible d'augmenter les stats
 		OU
 	- Si XP > nb : apparition du bouton d'upgrade de stats

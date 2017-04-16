@@ -6428,6 +6428,10 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":33,"_process":16,"inherits":32}],35:[function(require,module,exports){
 class Player {
 
+    constructor(hp) {
+        this.hp = hp;
+    }
+
     attack() {
         console.log("paf");
     }
@@ -32704,14 +32708,38 @@ class PlayerTest {
 
             describe('Test player class', function() {
 
-                var oPlayerTest = new Player();
+                let oPlayerTest = new Player(5);
+                let pvMax = 100;
+                let strengthMax = 100;
 
                 it('ok function return true', function() {
-                    chai.assert.isOk(oPlayerTest.ok, 'everything is ok');
+                    chai.assert.isTrue(oPlayerTest.ok, 'everything is ok');
                 });
-
-                it('pv du joueur superieur à 0', function() {
+                //PV
+                it('PV < 0', function() {
                     chai.assert.isAbove(oPlayerTest.hp,0);
+                });
+                it('PV > max', function() {
+                    chai.assert.isBelow(oPlayerTest.hp,pvMax);
+                });
+                //MANGE
+                it('légume mangé : PV++', function() {
+                    var currentHp = oPlayerTest.hp;
+                    oPlayerTest.eatVegetable(type);
+                    var hpAfterEating = oPlayerTest.hp;
+                    chai.assert.isAbove(currentHp,hpAfterEating);
+                });
+                //ATTAQUE
+                it('Attaque < 0', function() {
+                    chai.assert.isAbove(oPlayerTest.strength,0);
+                });
+                it('Attaque > max', function() {
+                    chai.assert.isBelow(oPlayerTest.strength,strengthMax);
+                });
+                //MAGIC
+                it('Magie (cooldown) > 0 : impossible de lancer un sort', function() {
+                    oPlayerTest.cooldown;
+                    chai.assert.equal(oPlayerTest.cooldown,0);
                 });
 
             });

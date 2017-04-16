@@ -1,5 +1,9 @@
 class Player {
 
+    constructor(hp) {
+        this.hp = hp;
+    }
+
     attack() {
         console.log("paf");
     }
