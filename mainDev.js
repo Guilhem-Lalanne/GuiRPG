@@ -1,3 +1,6 @@
+//LIBS
+var $ = require("jquery");
+
 //CLASS
 var Player = require("./class/player.js");
 
