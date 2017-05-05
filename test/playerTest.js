@@ -17,13 +17,10 @@ class PlayerTest {
 
             describe('Test player class', function() {
 
-                let oPlayerTest = new Player(5);
+                let oPlayerTest = new Player(5, 3);
                 let pvMax = 100;
                 let strengthMax = 100;
 
-                it('ok function return true', function() {
-                    chai.assert.isTrue(oPlayerTest.ok, 'everything is ok');
-                });
                 //PV
                 it('PV < 0', function() {
                     chai.assert.isAbove(oPlayerTest.hp,0);
@@ -39,10 +36,10 @@ class PlayerTest {
                     chai.assert.isAbove(hpAfterEating,currentHp);
                 });
                 //ATTAQUE
-                it('Attaque < 0', function() {
+                it('Attaque > 0', function() {
                     chai.assert.isAbove(oPlayerTest.strength,0);
                 });
-                it('Attaque > max', function() {
+                it('Attaque < max', function() {
                     chai.assert.isBelow(oPlayerTest.strength,strengthMax);
                 });
                 //MAGIC

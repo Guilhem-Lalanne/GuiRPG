@@ -1,7 +1,8 @@
 class Player {
 
-    constructor(hp) {
+    constructor(hp, strength) {
         this.hp = hp;
+        this.strength = strength;
     }
 
     attack() {
@@ -17,7 +18,7 @@ class Player {
 			this.hp += 1;
 		} else if (type === 2) {
 			this.hp += 2;
-		}else if (type === 3) {
+		} else if (type === 3) {
 			this.hp += 3;
 		}
 	}
