@@ -34,9 +34,9 @@ class PlayerTest {
                 //MANGE
                 it('légume mangé : PV++', function() {
                     var currentHp = oPlayerTest.hp;
-                    oPlayerTest.eatVegetable(type);
+                    oPlayerTest.eatVegetable(1);
                     var hpAfterEating = oPlayerTest.hp;
-                    chai.assert.isAbove(currentHp,hpAfterEating);
+                    chai.assert.isAbove(hpAfterEating,currentHp);
                 });
                 //ATTAQUE
                 it('Attaque < 0', function() {
