@@ -17,7 +17,7 @@ class PlayerTest {
 
             describe('Test player class', function() {
 
-                let oPlayerTest = new Player(5, 3);
+                let oPlayerTest = new Player(5, 3, 5);
                 let pvMax = 100;
                 let strengthMax = 100;
 
@@ -44,8 +44,8 @@ class PlayerTest {
                 });
                 //MAGIC
                 it('Magie (cooldown) > 0 : impossible de lancer un sort', function() {
-                    oPlayerTest.cooldown;
-                    chai.assert.equal(oPlayerTest.cooldown,0);
+                    oPlayerTest.cooldown(10000);
+                    chai.assert.equal(oPlayerTest.mana,0);
                 });
 
             });

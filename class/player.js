@@ -1,8 +1,9 @@
 class Player {
 
-    constructor(hp, strength) {
+    constructor(hp, strength, mana) {
         this.hp = hp;
         this.strength = strength;
+        this.mana = mana;
     }
 
     attack() {
@@ -21,6 +22,10 @@ class Player {
 		} else if (type === 3) {
 			this.hp += 3;
 		}
+	}
+
+	cooldown(time) {
+		this.mana = 0;
 	}
 
 }
