@@ -1,22 +1,18 @@
 {
   "name": "guirpg",
-  "version": "0.0.1",
-  "description": "npm install -g watchify\r watchify mainDev.js -o main.js",
+  "version": "0.0.2",
+  "description": "",
   "main": "main.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Guilhem-Lalanne/GuiRPG.git"
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Guilhem-Lalanne/GuiRPG/issues"
-  },
-  "homepage": "https://github.com/Guilhem-Lalanne/GuiRPG#readme"
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^3.3.0",
+    "chai": "*",
+    "browserify": "*",
+    "watchify": "*"
+  }
 }

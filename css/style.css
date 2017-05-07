@@ -1,6 +1,14 @@
-#btnUnitTest {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    z-index: 1;
+/*change la couleur de selection de la souris*/
+::selection {
+    color: red; 
+    background: yellow;
+}
+
+#statusBar {
+    /*height: 50px;*/
+    background-color: grey;
+    display: none;
+}
+
+pre {
 }

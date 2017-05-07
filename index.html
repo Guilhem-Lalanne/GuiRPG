@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-	<meta charset="UTF-8">
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/mocha.min.css"/>
-	<link rel="stylesheet" href="css/style.css"/>
-
-	<title>guirpg</title>
+  <title>GUIRPG</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="lib/jquery-3.2.1.min.js"></script>
+  <script src="bundle.js"></script>
 </head>
+
 <body>
-
-<div id="game" style="letter-spacing: 10px;"></div>
-
-<div class="container-fluid">
-	Bienvenue !
-</div>
-
-<button id="btnUnitTest" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#unitTestDiv" aria-expanded="false" aria-controls="unitTestDiv">
-	Voir les tests unitaires
-</button>
-<div class="collapse" id="unitTestDiv">
-	<div id="mocha"></div>
-</div>
-
+  <div id="main">
+    <div id="statusBar">
+      <pre>
+   __________
+  |          |
+  |  HP: <span id="hp"></span>   |
+  |__________|
+        </pre>
+    </div>
+  </div>
 </body>
-<script type="text/javascript" src="main.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </html>

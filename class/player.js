@@ -1,19 +1,19 @@
 class Player {
 
-    constructor(hp, strength, mana) {
-        this.hp = hp;
-        this.strength = strength;
-        this.mana = mana;
-    }
+	constructor(hp, strength, mana) {
+		this.hp = hp;
+		this.strength = strength;
+		this.mana = mana;
+	}
 
-    attack() {
-        console.log("paf");
-    }
+	attack() {
+		console.log("paf");
+	}
 
-    ok() {
-        return true;
-    }
-	
+	ok() {
+		return true;
+	}
+
 	eatVegetable(type) {
 		if (type === 1) {
 			this.hp += 1;

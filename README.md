@@ -1,10 +1,8 @@
 # GUIRPG
 
-### Créer le fichier main.js
+### Créer le fichier bundle.js
 
-	npm install -g watchify
-
-	watchify mainDev.js -o main.js
+	watchify main.js -o bundle.js
 
 
 ### Histoire et idées en vrac :
