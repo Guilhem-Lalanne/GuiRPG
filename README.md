@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Guilhem-Lalanne/GuiRPG.svg?branch=master)](https://travis-ci.org/Guilhem-Lalanne/GuiRPG)
+
 # GUIRPG
 
 ### Créer le fichier bundle.js
