@@ -4,6 +4,7 @@ node_js:
 install:
   - "npm install mocha"
   - "npm install -g codecov"
+  - "npm install istanbul"
 script:
   - "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --recursive"
   - "codecov"
