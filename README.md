@@ -86,6 +86,10 @@ Dans le village :
 - [fonctionnalité]
 	- [situation] : [situation finale]
 
+- Sauvegarde : fonction qui renvoie un string (json)
+	- Si sauvegarde existe ( !=null)
+	- Si sauvegarde est une String
+
 - Joueur :
 	- Si PV < 0
 	- Si PV > max
