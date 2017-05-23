@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/Guilhem-Lalanne/GuiRPG.svg?branch=master)](https://travis-ci.org/Guilhem-Lalanne/GuiRPG)
-
-[![codecov](https://codecov.io/gh/Guilhem-Lalanne/GuiRPG/branch/master/graph/badge.svg)](https://codecov.io/gh/Guilhem-Lalanne/GuiRPG)
+[![Build Status](https://travis-ci.org/Guilhem-Lalanne/GuiRPG.svg?branch=master)](https://travis-ci.org/Guilhem-Lalanne/GuiRPG) [![codecov](https://codecov.io/gh/Guilhem-Lalanne/GuiRPG/branch/master/graph/badge.svg)](https://codecov.io/gh/Guilhem-Lalanne/GuiRPG)
 
 
 # GUIRPG
@@ -53,7 +51,7 @@ Dans le village :
 	    - Magie
 	    - XP
 
-    Items : 
+    Items :
 	    - Permettent d'avoir des bonus ou de débloquer une quête
 	    - Visibles dans le sac
 	    - Peuvent être stacké (consommables) ou non (objets de quête)
@@ -65,8 +63,8 @@ Dans le village :
     Map :
         - Représentation graphique des niveaux (étapes)
         - Différents styles de niveaux :
-	        - "Point & click" 
-	        - Mouvement automatique du joueur sur un décor 2D 
+	        - "Point & click"
+	        - Mouvement automatique du joueur sur un décor 2D
 
     Evénements :
 	    - Liste de rencontres fixe sur chaque Map.
@@ -133,3 +131,11 @@ Dans le village :
 	- Si (???) : récolte possible des légumes
 	- Si récolte : légumes++ dans l'inventaire ?
 	- Si achat d'objet : légumes --
+
+- Atom shortcut
+	- ctrl + shift + d 						= dupliquer la ligne
+	- ctrl + clique 							= selectionner plusieurs elements
+	- ctrl + fleche gauche/droite = deplacement rapide dans le code
+	- ctrl + fleche haut/bas 			= monter/descendre une ligne
+	- ctrl + shift + fleche 			= deplacement rapide + selection
+	- alt  + shift 								= selection multi ligne

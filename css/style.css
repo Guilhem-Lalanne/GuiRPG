@@ -1,7 +1,14 @@
 /*change la couleur de selection de la souris*/
 ::selection {
-    color: red; 
+    color: red;
     background: yellow;
+}
+
+body {
+  background-color: white;
+}
+
+pre {
 }
 
 #statusBar {
@@ -10,5 +17,70 @@
     display: none;
 }
 
-pre {
+#game1 {
+  position: absolute;
+  top: 100px;
+}
+
+#bonhomme {
+  position: absolute;
+  left: 560px;
+  /* bottom: 725px; */
+  top: 50px;
+}
+
+#cage {
+  position: absolute;
+  left: 500px;
+}
+
+#jailDoor {
+  position: absolute;
+  display: none;
+  left: 460px;
+  top: 45px;
+}
+
+#interrupteur {
+  position: absolute;
+  left: 630px;
+  top: 30px;
+  cursor: pointer;
+  /* margin: 50px; */
+  z-index: 1;
+  width: 0;
+  height: 0;
+}
+
+#interrupteur ::selection {
+  color: blue;
+  background: green;
+}
+
+#jailKey {
+  top: 90px;
+  left: 490px;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+#chat {
+  display: none;
+}
+
+.bulle {
+  background-color: #a26363;
+  padding: 10px;
+  width: 100px;
+  border-radius: 10px;
+  text-align: -webkit-center;
+}
+
+.allBlack {
+  background-color: black;
+}
+
+.allWhite {
+  background-color: white;
 }
