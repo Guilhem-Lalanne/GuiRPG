@@ -18,38 +18,46 @@ pre {
 }
 
 #game1 {
-  position: absolute;
-  top: 100px;
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    height: 80%;
+    left: 0;
 }
 
 #bonhomme {
+  display: none;
   position: absolute;
-  left: 560px;
-  /* bottom: 725px; */
   top: 50px;
+  left: calc(50% - 220px);
+  transform: translateX(-50%);
 }
 
-#cage {
+.cage {
   position: absolute;
-  left: 500px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#cage2 {
+  display: none;
 }
 
 #jailDoor {
   position: absolute;
   display: none;
-  left: 460px;
-  top: 45px;
+  top: 0px;
+  left: calc(50% - 140px);
+  transform: translateX(-50%);
 }
 
 #interrupteur {
-  position: absolute;
-  left: 630px;
-  top: 30px;
-  cursor: pointer;
-  /* margin: 50px; */
   z-index: 1;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  left: calc(50% - -120px);
+  transform: translateX(-50%);
 }
 
 #interrupteur ::selection {
@@ -59,10 +67,10 @@ pre {
 
 #jailKey {
   top: 90px;
-  left: 490px;
   position: absolute;
-  width: 0;
-  height: 0;
+  top: 90px;
+  left: calc(50% - 110px);
+  transform: translateX(-50%);
 }
 
 #chat {

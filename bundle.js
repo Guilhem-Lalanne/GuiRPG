@@ -72,7 +72,9 @@ $(function () {
 
     //ouvre la porte
     $('#jailKey').on('click', function() {
-      $('#bonhomme').css('left','360px');
+      $('#bonhomme').css('display','block');
+      $('#cage1').css('display','none');
+      $('#cage2').css('display','block');
       $('#jailDoor').css('display','block');
       $('#jailKey').remove();
       showBubble("Je suis libre !!",10000);
@@ -94,7 +96,7 @@ function showBubble(texte,timeout) {
 
   var random = Math.floor(Math.random() * 500 + 1);
 
-  $('#main').append(bulle);
+  $('#game1').append(bulle);
   $('.bulle').last().css('position','absolute');
   $('.bulle').last().css('left',Math.floor(Math.random() * 500 + 1));
   $('.bulle').last().css('top',Math.floor(Math.random() * 500 + 1));
