@@ -2,18 +2,19 @@
 <html lang="fr">
 
 <head>
-  <title>GUIRPG</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/style.css" rel="stylesheet">
-  <script src="lib/jquery-3.2.1.min.js"></script>
-  <script src="bundle.js"></script>
+    <title>GUIRPG</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/hint.min.css" rel="stylesheet"></link>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="bundle.js"></script>
 </head>
 
-<body class="allBlack">
-<!-- ////////////////////////////////   STATUS BAR -->
+<body class="allWhite">
+    <!-- ////////////////////////////////   STATUS BAR -->
     <div id="statusBar">
-<pre>
+        <pre>
  __________
 |          |
 |  HP: <span id="hp"></span>   |
@@ -21,15 +22,16 @@
 </pre>
     </div>
 
-<!-- ////////////////////////////////   GAME BODY -->
-    <div id="game0" class="gameWindow">
-<span id="interrupteur">
-<pre>
+    <!-- ////////////////////////////////   GAME BODY -->
+    <div class="gameWindow">
+        <div id="game0">
+            <span id="interrupteur">
+<pre class="hint--top" aria-label="bouton">
  _
 |_|
 </pre>
 </span>
-<pre id="cage1" class="cage">
+            <pre id="cage1" class="cage">
 ================================
  ||     ||     ||     ||     || 
  ||    _|| (o) || (o) ||_    || 
@@ -40,7 +42,8 @@
  ||     ||     ||     ||     ||
 ================================
 </pre>
-<pre id="cage2" class="cage">
+            <span>
+            <pre id="cage2" class="cage">
 ================================
  ||     ||     ||     ||     ||
  ||     ||     ||     ||     ||
@@ -51,7 +54,8 @@
  ||     ||     ||     ||     ||
 ================================
 </pre>
-<pre id="jailDoor">
+</span>
+            <pre id="jailDoor">
  ____
 |    |
 |    |
@@ -61,13 +65,26 @@
 |    |
 |____|
 </pre>
-<pre id="jailKey">
+            <pre id="jailKey">
 8-
 </pre>
-<pre id="bonhomme">
+            <pre id="bonhomme" class="hint--top hint--medium" aria-label="Enfin sorti de cette cage... il est temps de partir !">
 •͡˘㇁•͡˘
 </pre>
-      <pre id="chat">
+<pre id="outJailDoor">
+ ______________
+|+-+-+-+-+-+-+-|
+|-+-+______+-+-|
+|+-+I      |+-+|
+|-+-| DEATH|-+-|
+|+-+| only | ++|
+|-+-I      |-+-|
+|+-+|     o|+-+|
+|-+-|      |-+-|
+|+-+I      |+-+|
+|===--------===|
+</pre>
+            <pre id="chat">
            .'\   /`.
          .'.-.`-'.-.`.
      ..._:   .-. .-.   :_...
@@ -81,7 +98,42 @@
       `-._   ````    _.-'
           ``-------''
       </pre>
+        </div>
+        <div id="game1" class="gameWindow">
+            <pre id="door0" class="dungeon0Door">
+   /|
+  / |
+ /__|___
+|       |
+|       |
+|       |
+|       +`
+|       |
+|_______|
+        </pre>
+            <pre id="door1" class="dungeon0Door">
+  _______
+ |       |
+ |       |
+ |       |
+`+       |
+ |       |
+ |_______|
+        </pre>
+            <pre id="door2" class="dungeon0Door">
+     |\
+     | \
+  ___|__\
+ |       |
+ |       |
+ |       |
+`+       |
+ |       |
+ |_______|
+        </pre>
+        </div>
     </div>
+    <div id="console"></div>
 </body>
 
 </html>

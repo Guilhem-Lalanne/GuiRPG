@@ -26,6 +26,15 @@ pre {
     left: 0;
 }
 
+#game0 {
+  display: none;
+}
+
+#game1 {
+  display: none;
+}
+
+
 #bonhomme {
   display: none;
   position: absolute;
@@ -70,8 +79,15 @@ pre {
   top: 90px;
   position: absolute;
   top: 90px;
-  left: calc(50% - 110px);
+  left: calc(50% - 120px);
   transform: translateX(-50%);
+}
+
+#outJailDoor {
+  position: absolute;
+  display: none;
+  cursor: pointer;
+  top: -30px;
 }
 
 #chat {
@@ -79,6 +95,7 @@ pre {
 }
 
 .bulle {
+  opacity: 0;
   color: white;
   background-color: #a26363;
   padding: 10px;
@@ -99,6 +116,22 @@ pre {
     border-right: 20px solid transparent;
     border-top: 20px solid #a26363;
     z-index: 0;
+}
+
+.dungeon0Door {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+#door0 {
+  top: 100px;
+  left: calc(50% - 200px);
+}
+#door2 {
+  top: 100px;
+  left: calc(50% + 200px);
 }
 
 .allBlack {

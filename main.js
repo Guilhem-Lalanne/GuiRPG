@@ -1,12 +1,14 @@
 //REQUIRES
 var Player = require("./class/player.js");
+var Dice = require("./class/dice.js");
 
 //GAME
 var stopBulle = false;
+var currentLevel = 0;
 var firstLevelCompleted = 0;
 
 var oPlayer1 = new Player(5, 5, 6);
-
+var oD10 = new Dice(10);
 //RENDER
 $(function () {
 
@@ -15,55 +17,93 @@ $(function () {
   /*affiche la barre de statuts avec effet fadeIn*/
   //$( "#statusBar" ).fadeIn( "slow", function() {});
 
-  //Level0
-  if (firstLevelCompleted === 0) {
+  initLevel0();
 
-    let msgStart = [
-      "Ou est ce que je suis ?",
-      "Il fait noir !",
-      "Je ne comprend pas ...",
-      "Je dois je trouver l'interrupteur"
-    ];
+  //START LEVEL0
+  function initLevel0() {
 
-    showDialog(msgStart, 2000);
+    if (currentLevel === 0 && firstLevelCompleted === 0) {
 
-    firstLevelCompleted = 1;
-  }
+      $('#game0').show();
 
-  $('#interrupteur').on('click', function () {
-    if ($('body').hasClass('allWhite')) {
-      $('body').toggleClass('allWhite allBlack');
-    } else {
-      $('body').toggleClass('allWhite allBlack');
+      let msgStart = [
+        "Ou est ce que je suis ?",
+        "Il fait noir ...",
+        "Qu'est ce qui se passe ?!!",
+        "Je dois trouver l'interrupteur"
+      ];
+
+      showDialog(msgStart, 2000);
+
+      firstLevelCompleted = 1;
+
+
+      $('#interrupteur').on('click', function () {
+        if ($('body').hasClass('allWhite')) {
+          $('body').toggleClass('allWhite allBlack');
+        } else {
+          $('body').toggleClass('allWhite allBlack');
+        }
+      });
+
+      //ouvre la porte
+      $('#jailKey').on('click', function () {
+        $('#bonhomme').css('display', 'block');
+        $('#cage1').css('display', 'none');
+        $('#cage2').css('display', 'block');
+        $('#jailDoor').css('display', 'block');
+        $('#outJailDoor').css('display', 'block');
+        $('#jailKey').remove();
+
+        stopBulle = true;
+
+        //showBubble("Je suis libre !!", 10000, true);
+        /*setTimeout(function () {
+          $('#chat').css('display', 'block');
+        }, 5000);*/
+      });
+
+      $('#outJailDoor').on('click', function() {
+        $('.bulle').remove();
+        $('#game0').hide();
+        currentLevel = 1;
+        initLevel1();
+      });
+
+      // ouvre l'autre page
+      $('#chat').on('click', function () {
+        $('#game0').css('display', 'none');
+      });
     }
-  });
+  }
+  //END LEVEL0
 
-  //ouvre la porte
-  $('#jailKey').on('click', function () {
-    $('#bonhomme').css('display', 'block');
-    $('#cage1').css('display', 'none');
-    $('#cage2').css('display', 'block');
-    $('#jailDoor').css('display', 'block');
-    $('#jailKey').remove();
+  //START LEVEL1
+  function initLevel1() {
+    if (currentLevel === 1) {
 
-    stopBulle = true;
+      $('#game1').show();
 
-    //showBubble("Je suis libre !!", 10000, true);
-    /*setTimeout(function () {
-      $('#chat').css('display', 'block');
-    }, 5000);*/
-  });
+      $('.dungeon0Door').on('click', function (e) {
+        console.log(currentLevel);
+        if (oD10.roll() >= 8) {
+          currentLevel = 2;
+        } else {
+          $('.dungeon0Door').animate({ opacity: '0' }, 'slow', function () {
+            $('.dungeon0Door').animate({ opacity: '1' }, 'fast');
+          });
+        }
+      });
+    }
+  }
+  //END LEVEL1
 
-  // ouvre l'autre page
-  $('#chat').on('click', function () {
-    $('#game0').css('display', 'none');
-  });
 });
 
 //BULLE RECURSIVE
 function showDialog(texteArray, timeout) {
 
-  if(!stopBulle) {
+  if (!stopBulle) {
     var nbMessage = 0;
 
     //compte le nombre de message a afficher
@@ -79,19 +119,20 @@ function showDialog(texteArray, timeout) {
 
       //affiche la bulle à une position aleatoire
       $('.gameWindow').append(bulle);
+
       $('.bulle').last().css('position', 'absolute');
       $('.bulle').last().css('left', Math.floor(Math.random() * $('.gameWindow').width() - 120 + 120));
       $('.bulle').last().css('top', Math.floor(Math.random() * $('.gameWindow').height() - 240 + 220));
+      $('.bulle').last().animate({ opacity: '1' }, 'slow');
 
       //supprime le 1er element du tableau
       texteArray.shift();
 
       //cache la bulle et rappel la function
       setTimeout(function () {
-        $('#' + bulleId).hide("slow", function () {
-          this.remove();
+        $('.bulle').last().animate({ opacity: '0' }, 'slow', function () {
+          showDialog(texteArray, timeout);
         });
-        showDialog(texteArray, timeout);
       }, timeout);
     }
   } else {
