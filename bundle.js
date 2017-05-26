@@ -37,8 +37,8 @@ module.exports = Player;
 var Player = require("./class/player.js");
 
 //GAME
+var stopBulle = false;
 var firstLevelCompleted = 0;
-var pauseBulle = 0;
 
 var oPlayer1 = new Player(5, 5, 6);
 
@@ -53,28 +53,25 @@ $(function () {
   //Level0
   if (firstLevelCompleted === 0) {
 
-    var msgStart = [
+    let msgStart = [
       "Ou est ce que je suis ?",
       "Il fait noir !",
       "Je ne comprend pas ...",
       "Je dois je trouver l'interrupteur"
     ];
 
-    showBubble(msgStart, 5000);
+    showDialog(msgStart, 2000);
 
     firstLevelCompleted = 1;
   }
 
   $('#interrupteur').on('click', function () {
-
     if ($('body').hasClass('allWhite')) {
-      $('body').toggleClass('allWhite');
-      $('body').toggleClass('allBlack');
+      $('body').toggleClass('allWhite allBlack');
     } else {
-      $('body').toggleClass('allBlack');
-      $('body').toggleClass('allWhite');
+      $('body').toggleClass('allWhite allBlack');
     }
-  })
+  });
 
   //ouvre la porte
   $('#jailKey').on('click', function () {
@@ -83,10 +80,13 @@ $(function () {
     $('#cage2').css('display', 'block');
     $('#jailDoor').css('display', 'block');
     $('#jailKey').remove();
-    showBubble("Je suis libre !!", 10000);
-    setTimeout(function () {
+
+    stopBulle = true;
+
+    //showBubble("Je suis libre !!", 10000, true);
+    /*setTimeout(function () {
       $('#chat').css('display', 'block');
-    }, 5000);
+    }, 5000);*/
   });
 
   // ouvre l'autre page
@@ -96,52 +96,41 @@ $(function () {
 });
 
 //BULLE RECURSIVE
-function showBubble(texteArray, timeout) {
+function showDialog(texteArray, timeout) {
 
-  var nbMessage = 0;
+  if(!stopBulle) {
+    var nbMessage = 0;
 
-  //compte le nombre de message a afficher
-  if(Array.isArray(texteArray)) {
+    //compte le nombre de message a afficher
     $.each(texteArray, function (key, value) {
       nbMessage++;
     });
-  } else {
-    nbMessage++;
-  }
 
-  if (nbMessage > 0 && pauseBulle === 0) {
+    if (nbMessage > 0) {
 
-    let msg;
+      var bulleId = Math.floor(Math.random() * 1000 + 1);
 
-    if(Array.isArray(texteArray)) {
-      msg = texteArray[0];
-    } else {
-      msg = texteArray;
-    }
-    var bulle = '<div class="bulle">' + msg + '<div class="arrow-down"></div></div>';
+      var bulle = '<div id="' + bulleId + '" class="bulle">' + texteArray[0] + '<div class="arrow-down"></div></div>';
 
-    //affiche la bulle à une position aleatoire
-    $('.gameWindow').append(bulle);
-    $('.bulle').last().css('position', 'absolute');
-    $('.bulle').last().css('left', Math.floor(Math.random() * $('.gameWindow').width()-30 + 30));
-    $('.bulle').last().css('top', Math.floor(Math.random() * $('.gameWindow').height()-30 + 30));
+      //affiche la bulle à une position aleatoire
+      $('.gameWindow').append(bulle);
+      $('.bulle').last().css('position', 'absolute');
+      $('.bulle').last().css('left', Math.floor(Math.random() * $('.gameWindow').width() - 120 + 120));
+      $('.bulle').last().css('top', Math.floor(Math.random() * $('.gameWindow').height() - 240 + 220));
 
-    //supprime le 1er element du tableau
-    if(Array.isArray(texteArray)) {
+      //supprime le 1er element du tableau
       texteArray.shift();
+
+      //cache la bulle et rappel la function
+      setTimeout(function () {
+        $('#' + bulleId).hide("slow", function () {
+          this.remove();
+        });
+        showDialog(texteArray, timeout);
+      }, timeout);
     }
-
-    //cache la bulle et rappel la function
-    setTimeout(function () {
-
-      $('.bulle').hide("slow");
-      if(Array.isArray(texteArray)) {
-        showBubble(texteArray, timeout);
-      }
-
-    }, timeout);
   } else {
-    pauseBulle = 0;
+    stopBulle = !stopBulle;
   }
 
 }
