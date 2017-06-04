@@ -189,4 +189,26 @@ $(function () {
 
   }
 
+  var idMsgCons = 0;
+
+  function printConsole(text, callback) {
+    idMsgCons++;
+    let current_id = idMsgCons;
+    $('#console').append('<span id="msgCons' + current_id + '" class="msgCons"></span>');
+    $("#console").animate({ scrollTop: $('#console').height() }, "slow");
+    var msgArray = [];
+    for (var i = 0; i < text.length; i++) {
+      msgArray[i] = text.charAt(i);
+    }
+    var j = 0;
+    var print = setInterval(function () {
+      $('#msgCons' + current_id).append(msgArray[j]);
+      j++;
+      if (j === text.length) {
+        clearInterval(print);
+        if (typeof callback === "function")
+          callback();
+      }
+    }, 50);
+  }
 });

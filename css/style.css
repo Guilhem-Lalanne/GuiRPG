@@ -153,4 +153,11 @@ pre {
     height: 100px;
     width: 400px;
     background-color: rgba(255, 255, 255, 0.8);
+    overflow: auto;
+    z-index: 10;
+}
+
+.msgCons {
+  width: 100%;
+  float: left;
 }
