@@ -13,7 +13,9 @@ describe('Test dice class', function () {
     });
 
     it('jet de dé < max', function () {
-        chai.assert.isBelow(oTestD20.roll(), d20);
+        for (var i = 1; i <= 50; i++) {
+            chai.assert.isBelow(oTestD20.roll(), d20+1);
+        }
     });
 
 });

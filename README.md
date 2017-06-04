@@ -60,7 +60,7 @@ Dans le village :
         - Objectif à remplir
         - Rewards
 
-    Map :
+    Scenes (ancien nom : Map) :
         - Représentation graphique des niveaux (étapes)
         - Différents styles de niveaux :
 	        - "Point & click"

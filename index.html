@@ -5,6 +5,7 @@
     <title>GUIRPG</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/font-awesome.min.css" rel="stylesheet"></link>
     <link href="css/hint.min.css" rel="stylesheet"></link>
     <link href="css/style.css" rel="stylesheet">
     <script src="lib/jquery-3.2.1.min.js"></script>
@@ -14,12 +15,7 @@
 <body class="allWhite">
     <!-- ////////////////////////////////   STATUS BAR -->
     <div id="statusBar">
-        <pre>
- __________
-|          |
-|  HP: <span id="hp"></span>   |
-|__________|
-</pre>
+        HP: <span id="hp"></span>
     </div>
 
     <!-- ////////////////////////////////   GAME BODY -->
@@ -132,8 +128,21 @@
  |_______|
         </pre>
         </div>
+        <div id="game2" class="gameWindow">
+<pre  id="peacefulForest">
+ ^  ^  ^  ^  ^   ^   ^    ^   ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^
+/|\/|\/|\/|\/|\ /|\ /|\  /|\ /|\/|\/|\ /|\    /\-_--\    /|\/|\ /|\/|\/|\ /|\/|\
+/|\/|\/|\/|\/|\ /|\ /|\  /|\ /|\/|\/|\ /|\   /  \_-__\   /|\/|\ /|\/|\/|\ /|\/|\
+/|\/|\/|\/|\/|\ /|\ /|\  /|\ /|\/|\/|\ /|\   |[]| [] |   /|\/|\ /|\/|\/|\ /|\/|\
+</pre>
+<pre id="miniHero">
+ \o/
+</pre>
+        </div>
     </div>
-    <div id="console"></div>
+    <i id="btnResizeConsole" class="fa fa-minus" aria-hidden="true"></i>
+    <div id="console">
+    </div>
 </body>
 
 </html>

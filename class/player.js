@@ -1,17 +1,21 @@
 class Player {
 
-	constructor(hp, strength, mana) {
+	constructor(hp, strength, mana, agility, defense, attackDice, dodgeDice) {
+		var Dice = require("../class/dice.js");
+		//param
 		this.hp = hp;
 		this.strength = strength;
 		this.mana = mana;
+		this.agility = agility;
+		this.defense = defense;
+		this.oAttackDice = new Dice(attackDice);
+        this.oDodgeDice = new Dice(dodgeDice);
 	}
 
 	attack() {
 		console.log("paf");
-	}
-
-	ok() {
-		return true;
+		var damage = Math.floor((Math.random() * this.oAttackDice.roll()) + this.strength);
+        return damage;
 	}
 
 	eatVegetable(type) {

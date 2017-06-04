@@ -3,26 +3,48 @@ var Player = require("./class/player.js");
 var Dice = require("./class/dice.js");
 
 //GAME
+var currentScene = null;
 var stopBulle = false;
-var currentLevel = 0;
-var firstLevelCompleted = 0;
+var firstSceneCompleted = 0;
 
 var oPlayer1 = new Player(5, 5, 6);
 var oD10 = new Dice(10);
+
 //RENDER
 $(function () {
 
   $('#hp').html(oPlayer1.hp);
 
+  loadScene(2);
+
   /*affiche la barre de statuts avec effet fadeIn*/
   //$( "#statusBar" ).fadeIn( "slow", function() {});
 
-  initLevel0();
+  function loadScene(id) {
+    switch (id) {
+      case 0:
+        currentScene = 0;
+        initScene0();
+        break;
+      case 1:
+        currentScene = 1;
+        initScene1();
+        break;
+      case 2:
+        currentScene = 2;
+        initScene2();
+        break;
+
+      default:
+        initScene0();
+        break;
+    }
+  }
 
   //START LEVEL0
-  function initLevel0() {
+  function initScene0() {
 
-    if (currentLevel === 0 && firstLevelCompleted === 0) {
+    if (currentScene === 0 && firstSceneCompleted === 0) {
 
       $('#game0').show();
 
@@ -35,7 +57,7 @@ $(function () {
 
       showDialog(msgStart, 2000);
 
-      firstLevelCompleted = 1;
+      firstSceneCompleted = 1;
 
 
       $('#interrupteur').on('click', function () {
@@ -63,11 +85,11 @@ $(function () {
         }, 5000);*/
       });
 
-      $('#outJailDoor').on('click', function() {
+      $('#outJailDoor').on('click', function () {
         $('.bulle').remove();
         $('#game0').hide();
-        currentLevel = 1;
-        initLevel1();
+        currentScene = 1;
+        initScene1();
       });
 
       // ouvre l'autre page
@@ -79,15 +101,15 @@ $(function () {
   //END LEVEL0
 
   //START LEVEL1
-  function initLevel1() {
-    if (currentLevel === 1) {
+  function initScene1() {
+    if (currentScene === 1) {
 
       $('#game1').show();
 
       $('.dungeon0Door').on('click', function (e) {
-        console.log(currentLevel);
+        console.log(currentScene);
         if (oD10.roll() >= 8) {
-          currentLevel = 2;
+          currentScene = 2;
         } else {
           $('.dungeon0Door').animate({ opacity: '0' }, 'slow', function () {
             $('.dungeon0Door').animate({ opacity: '1' }, 'fast');
@@ -98,45 +120,73 @@ $(function () {
   }
   //END LEVEL1
 
-});
-
-//BULLE RECURSIVE
-function showDialog(texteArray, timeout) {
-
-  if (!stopBulle) {
-    var nbMessage = 0;
-
-    //compte le nombre de message a afficher
-    $.each(texteArray, function (key, value) {
-      nbMessage++;
-    });
-
-    if (nbMessage > 0) {
-
-      var bulleId = Math.floor(Math.random() * 1000 + 1);
-
-      var bulle = '<div id="' + bulleId + '" class="bulle">' + texteArray[0] + '<div class="arrow-down"></div></div>';
-
-      //affiche la bulle à une position aleatoire
-      $('.gameWindow').append(bulle);
-
-      $('.bulle').last().css('position', 'absolute');
-      $('.bulle').last().css('left', Math.floor(Math.random() * $('.gameWindow').width() - 120 + 120));
-      $('.bulle').last().css('top', Math.floor(Math.random() * $('.gameWindow').height() - 240 + 220));
-      $('.bulle').last().animate({ opacity: '1' }, 'slow');
-
-      //supprime le 1er element du tableau
-      texteArray.shift();
-
-      //cache la bulle et rappel la function
-      setTimeout(function () {
-        $('.bulle').last().animate({ opacity: '0' }, 'slow', function () {
-          showDialog(texteArray, timeout);
-        });
-      }, timeout);
+  function initScene2() {
+    if (currentScene === 2) {
+      $('#game2').show();
+      moveMiniHero(5, 60, 100);
     }
-  } else {
-    stopBulle = !stopBulle;
   }
 
-}
+  $('#btnResizeConsole').on('click', function () {
+    $('#console').toggle();
+    $('#btnResizeConsole').toggleClass('fa-minus fa-plus');
+  });
+
+  function moveMiniHero(margin, duration, speed) {
+
+    var movement = setInterval(function () {
+
+      let current_margin = parseInt($("#miniHero").css("margin-left"));
+      $('#miniHero').css('margin-left', current_margin + margin);
+
+      duration--;
+
+      if (duration <= 0) {
+        clearInterval(movement);
+      }
+    }, speed);
+
+  }
+
+  //BULLE RECURSIVE
+  function showDialog(texteArray, timeout) {
+
+    if (!stopBulle) {
+      var nbMessage = 0;
+
+      //compte le nombre de message a afficher
+      $.each(texteArray, function (key, value) {
+        nbMessage++;
+      });
+
+      if (nbMessage > 0) {
+
+        var bulleId = Math.floor(Math.random() * 1000 + 1);
+
+        var bulle = '<div id="' + bulleId + '" class="bulle">' + texteArray[0] + '<div class="arrow-down"></div></div>';
+
+        //affiche la bulle à une position aleatoire
+        $('.gameWindow').append(bulle);
+
+        $('.bulle').last().css('position', 'absolute');
+        $('.bulle').last().css('left', Math.floor(Math.random() * $('.gameWindow').width() - 120 + 120));
+        $('.bulle').last().css('top', Math.floor(Math.random() * $('.gameWindow').height() - 240 + 220));
+        $('.bulle').last().animate({ opacity: '1' }, 'slow');
+
+        //supprime le 1er element du tableau
+        texteArray.shift();
+
+        //cache la bulle et rappel la function
+        setTimeout(function () {
+          $('.bulle').last().animate({ opacity: '0' }, 'slow', function () {
+            showDialog(texteArray, timeout);
+          });
+        }, timeout);
+      }
+    } else {
+      stopBulle = !stopBulle;
+    }
+
+  }
+
+});

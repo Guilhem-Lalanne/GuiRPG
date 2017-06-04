@@ -7,6 +7,7 @@
 body {
   background-color: white;
   overflow: hidden;
+  margin: 0;
 }
 
 pre {
@@ -14,7 +15,9 @@ pre {
 
 #statusBar {
     /*height: 50px;*/
-    background-color: grey;
+    border: 1px solid black;
+    padding: 10px;
+    /*background-color: grey;*/
     display: none;
 }
 
@@ -26,14 +29,9 @@ pre {
     left: 0;
 }
 
-#game0 {
+#game0, #game1, #game2  {
   display: none;
 }
-
-#game1 {
-  display: none;
-}
-
 
 #bonhomme {
   display: none;
@@ -140,4 +138,19 @@ pre {
 
 .allWhite {
   background-color: white;
+}
+
+#btnResizeConsole {
+  position: absolute;
+  bottom: 120px;
+  left: 5px;
+}
+
+#console {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 20px;
+    height: 100px;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
