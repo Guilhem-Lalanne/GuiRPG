@@ -18,7 +18,11 @@ class Player {
 	constructor(hp, strength, mana, agility, defense, attackDice, dodgeDice) {
 		var Dice = require("../class/dice.js");
 		//param
+		this.energy = 0;
+		this.energyBonus = 1;
+		this.energyMultiplier = 1;
 		this.hp = hp;
+		this.hpMax = 5;
 		this.strength = strength;
 		this.mana = mana;
 		this.agility = agility;
@@ -59,21 +63,46 @@ var Dice = require("./class/dice.js");
 var currentScene = null;
 var stopBulle = false;
 var firstSceneCompleted = 0;
+var uptake = 3;
 
-var oPlayer1 = new Player(5, 5, 6);
+var upTakeCountdown = 2;
+
+var oPlayer1 = new Player(3, 5, 6);
 var oD10 = new Dice(10);
 
 //RENDER
 $(function () {
 
   $('#hp').html(oPlayer1.hp);
+  $('#hpMax').html(oPlayer1.hpMax);
 
-  loadScene(2);
+  //BOUCLE DU JEU
+  setInterval(function () {
+    //ajoute de l'energie chaque second
+    oPlayer1.energy += oPlayer1.energyBonus * oPlayer1.energyMultiplier;
+    $('#energy').html(oPlayer1.energy);
+    $('#energyLabel').attr('aria-label', oPlayer1.energyBonus * oPlayer1.energyMultiplier + '/s');
 
-  /*affiche la barre de statuts avec effet fadeIn*/
-  //$( "#statusBar" ).fadeIn( "slow", function() {});
+    //masque l'energie consommé
+    if (upTakeCountdown > 0) {
+      upTakeCountdown--;
+      if (upTakeCountdown === 0) {
+        $("#uptake").fadeOut("slow");
+      }
+    }
+  }, 1000);
+  //END BOUCLE DU JEU
+
+  $('#overlayBlack').on('click', function() {
+    loadScene(0);
+    $(this).fadeOut("slow");
+  });
+
+  //pour debug
+  //$("#statusBar").fadeIn("slow", function () { });
 
   function loadScene(id) {
+    $('.game').hide();
     switch (id) {
       case 0:
         currentScene = 0;
@@ -99,7 +128,8 @@ $(function () {
 
     if (currentScene === 0 && firstSceneCompleted === 0) {
 
-      $('#game0').show();
+      $('#game0').show("fast");
+      $("#console").hide();
 
       let msgStart = [
         "Ou est ce que je suis ?",
@@ -110,44 +140,57 @@ $(function () {
 
       showDialog(msgStart, 2000);
 
+      printConsole("Ou est ce que je suis ?", function () {
+        printConsole("Il fait noir ...", function () {
+          printConsole("Qu'est ce qui se passe ?!!", function () {
+            printConsole("Je dois trouver l'interrupteur", function () {
+            });
+          });
+        });
+      });
+
       firstSceneCompleted = 1;
 
+      $('#cage1').on('click', function () {
+        printConsole('Secoue les barreaux, rien ne bouge ...');
+        consumeEnergy(5);
+      });
 
+      //allume la lumiere
       $('#interrupteur').on('click', function () {
+        $("#console").toggle();
         if ($('body').hasClass('allWhite')) {
           $('body').toggleClass('allWhite allBlack');
+          printConsole('clack..');
         } else {
           $('body').toggleClass('allWhite allBlack');
+          printConsole('click..');
         }
-      });
-
-      //ouvre la porte
-      $('#jailKey').on('click', function () {
-        $('#bonhomme').css('display', 'block');
-        $('#cage1').css('display', 'none');
-        $('#cage2').css('display', 'block');
-        $('#jailDoor').css('display', 'block');
-        $('#outJailDoor').css('display', 'block');
-        $('#jailKey').remove();
-
         stopBulle = true;
-
-        //showBubble("Je suis libre !!", 10000, true);
-        /*setTimeout(function () {
-          $('#chat').css('display', 'block');
-        }, 5000);*/
       });
 
+      //ouvre la porte de la cage
+      $('#jailKey').on('click', function () {
+          printConsole('Vous avez trouvé la clé de la cage', function () {
+            printConsole('Vous sortez de la cage');
+          });
+          $("#statusBar").fadeIn("slow");
+          $('#bonhomme').css('display', 'block');
+          $('#cage1').css('display', 'none');
+          $('#cage2').css('display', 'block');
+          $('#jailDoor').css('display', 'block');
+          $('#outJailDoor').css('display', 'block');
+          $('#jailKey').remove();
+      });
+
+      //sort du donjon
       $('#outJailDoor').on('click', function () {
-        $('.bulle').remove();
-        $('#game0').hide();
-        currentScene = 1;
-        initScene1();
-      });
+        if (consumeEnergy(10)) {
+          $('.bulle').remove();
+          printConsole('Vous entrez dans les couloirs du donjon');
+          loadScene(1);
+        }
 
-      // ouvre l'autre page
-      $('#chat').on('click', function () {
-        $('#game0').css('display', 'none');
       });
     }
   }
@@ -157,28 +200,34 @@ $(function () {
   function initScene1() {
     if (currentScene === 1) {
 
-      $('#game1').show();
+      $('#game1').show("fast");
 
+      //clique sur une porte
       $('.dungeon0Door').on('click', function (e) {
         console.log(currentScene);
-        if (oD10.roll() >= 8) {
-          currentScene = 2;
-        } else {
-          $('.dungeon0Door').animate({ opacity: '0' }, 'slow', function () {
-            $('.dungeon0Door').animate({ opacity: '1' }, 'fast');
-          });
+        if (consumeEnergy(10)) {
+          if (oD10.roll() >= 8) {
+            printConsole('Vous vous echappez du donjon');
+            loadScene(2);
+          } else {
+            $('.dungeon0Door').animate({ opacity: '0' }, 'slow', function () {
+              $('.dungeon0Door').animate({ opacity: '1' }, 'fast');
+            });
+          }
         }
       });
     }
   }
   //END LEVEL1
 
+  //START LEVEL2
   function initScene2() {
     if (currentScene === 2) {
-      $('#game2').show();
+      $('#game2').show("fast");
       moveMiniHero(5, 60, 100);
     }
   }
+  //END LEVEL2
 
   $('#btnResizeConsole').on('click', function () {
     $('#console').toggle();
@@ -247,15 +296,14 @@ $(function () {
   function printConsole(text, callback) {
     idMsgCons++;
     let current_id = idMsgCons;
-    $('#console').append('<span id="msgCons' + current_id + '" class="msgCons"></span>');
-    $("#console").animate({ scrollTop: $('#console').height() }, "slow");
+    $('#console').prepend('<span id="msgCons' + current_id + '" class="msgCons"></span>');
     var msgArray = [];
     for (var i = 0; i < text.length; i++) {
       msgArray[i] = text.charAt(i);
     }
     var j = 0;
     var print = setInterval(function () {
-      $('#msgCons' + current_id).append(msgArray[j]);
+      $('#msgCons' + current_id).html($('#msgCons' + current_id).html() + msgArray[j]);
       j++;
       if (j === text.length) {
         clearInterval(print);
@@ -264,5 +312,21 @@ $(function () {
       }
     }, 50);
   }
+
+  function consumeEnergy(value) {
+    var temp = oPlayer1.energy - value;
+    if (temp >= 0) {
+      upTakeCountdown = 3;
+      oPlayer1.energy -= value;
+      $("#uptake").hide();
+      $('#uptake').html(' -' + value);
+      $("#uptake").fadeIn("fast");
+      return true;
+    } else {
+      printConsole("Pas assez d'énergie !");
+      return false;
+    }
+  }
+
 });
 },{"./class/dice.js":1,"./class/player.js":2}]},{},[3]);

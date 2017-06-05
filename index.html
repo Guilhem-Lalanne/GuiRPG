@@ -5,6 +5,8 @@
     <title>GUIRPG</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=La+Belle+Aurore" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet"></link>
     <link href="css/hint.min.css" rel="stylesheet"></link>
     <link href="css/style.css" rel="stylesheet">
@@ -12,15 +14,27 @@
     <script src="bundle.js"></script>
 </head>
 
-<body class="allWhite">
+
+<body class="allBlack">
+<div id="overlayBlack">
+    <div id="btnStartGame">
+        <span>Commencer l'Aventure</span>
+        <img src="https://openclipart.org/download/7065/johnny-automatic-scroll.svg" />
+    </div>
+</div>
     <!-- ////////////////////////////////   STATUS BAR -->
     <div id="statusBar">
-        HP: <span id="hp"></span>
+        <div class="statPerso">
+           <i class="fa fa-eercast" aria-hidden="true"></i><span id='energyLabel' class="label hint--bottom">ENERGIE:</span><span id="energy"></span><span id="uptake"></span>
+        </div>
+        <div class="statPerso">
+            <span id='hpLabel' class="label">HP:</span><span id="hp"></span>/<span id="hpMax"></span>
+        </div>
     </div>
 
     <!-- ////////////////////////////////   GAME BODY -->
     <div class="gameWindow">
-        <div id="game0">
+        <div id="game0" class="game">
             <span id="interrupteur">
 <pre class="hint--top" aria-label="bouton">
  _
@@ -95,7 +109,7 @@
           ``-------''
       </pre>
         </div>
-        <div id="game1" class="gameWindow">
+        <div id="game1" class="game">
             <pre id="door0" class="dungeon0Door">
    /|
   / |
@@ -128,7 +142,7 @@
  |_______|
         </pre>
         </div>
-        <div id="game2" class="gameWindow">
+        <div id="game2" class="game">
 <pre  id="peacefulForest">
  ^  ^  ^  ^  ^   ^   ^    ^   ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^
 /|\/|\/|\/|\/|\ /|\ /|\  /|\ /|\/|\/|\ /|\    /\-_--\    /|\/|\ /|\/|\/|\ /|\/|\

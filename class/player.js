@@ -3,7 +3,11 @@ class Player {
 	constructor(hp, strength, mana, agility, defense, attackDice, dodgeDice) {
 		var Dice = require("../class/dice.js");
 		//param
+		this.energy = 0;
+		this.energyBonus = 1;
+		this.energyMultiplier = 1;
 		this.hp = hp;
+		this.hpMax = 5;
 		this.strength = strength;
 		this.mana = mana;
 		this.agility = agility;
