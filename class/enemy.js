@@ -26,8 +26,8 @@ class Enemy {
     }
 
     takeDamage(damageTaken) {
-        this.hp -= damageTaken-this.defense;
-        if(this.hp <= 0) {
+        this.hp -= damageTaken - this.defense;
+        if (this.hp <= 0) {
             this.die();
         }
     }

@@ -13,13 +13,12 @@ class Player {
 		this.agility = agility;
 		this.defense = defense;
 		this.oAttackDice = new Dice(attackDice);
-        this.oDodgeDice = new Dice(dodgeDice);
+		this.oDodgeDice = new Dice(dodgeDice);
 	}
 
 	attack() {
-		console.log("paf");
 		var damage = Math.floor((Math.random() * this.oAttackDice.roll()) + this.strength);
-        return damage;
+		return damage;
 	}
 
 	eatVegetable(type) {

@@ -1,7 +1,8 @@
 /*change la couleur de selection de la souris*/
+
 ::selection {
-    color: red;
-    background: yellow;
+  color: red;
+  background: yellow;
 }
 
 body {
@@ -11,24 +12,23 @@ body {
   font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }
 
-pre {
-}
+pre {}
 
 #overlayBlack {
+  position: absolute;
   background-color: #3e3e3e;
   width: 100%;
   height: 100%;
   z-index: 100;
-  position: absolute;
 }
 
 #btnStartGame {
-  font-size: 40px;
   position: absolute;
-  font-family: 'La Belle Aurore', cursive;
-  color: white;
   top: 40%;
   left: 50%;
+  font-size: 40px;
+  font-family: 'La Belle Aurore', cursive;
+  color: white;
   transform: translateX(-50%);
   cursor: pointer;
 }
@@ -38,18 +38,18 @@ pre {
 }
 
 #statusBar {
-    /*height: 50px;*/
-    border: 1px solid black;
-    padding: 10px;
-    /*background-color: grey;*/
-    display: none;
-    font-size: small;
+  /*background-color: grey;*/
+  display: none;
+  /*height: 50px;*/
+  border: 1px solid black;
+  padding: 10px;
+  font-size: small;
 }
 
 .statPerso {
-    padding-right: 5px;
-    width: 150px;
-    display: inline-block;
+  display: inline-block;
+  padding-right: 5px;
+  width: 150px;
 }
 
 .label {
@@ -64,14 +64,16 @@ pre {
 }
 
 .gameWindow {
-    position: absolute;
-    top: 100px;
-    width: 100%;
-    height: 80%;
-    left: 0;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 80%;
 }
 
-#game0, #game1, #game2  {
+#game0,
+#game1,
+#game2 {
   display: none;
 }
 
@@ -94,19 +96,19 @@ pre {
 }
 
 #jailDoor {
-  position: absolute;
   display: none;
+  position: absolute;
   top: 0px;
   left: calc(50% - 140px);
   transform: translateX(-50%);
 }
 
 #interrupteur {
-  z-index: 1;
-  cursor: pointer;
   position: absolute;
   top: 30px;
   left: calc(50% - -120px);
+  z-index: 1;
+  cursor: pointer;
   transform: translateX(-50%);
 }
 
@@ -116,18 +118,18 @@ pre {
 }
 
 #jailKey {
-  top: 90px;
   position: absolute;
+  top: 90px;
   top: 90px;
   left: calc(50% - 120px);
   transform: translateX(-50%);
 }
 
 #outJailDoor {
-  position: absolute;
   display: none;
-  cursor: pointer;
+  position: absolute;
   top: -30px;
+  cursor: pointer;
 }
 
 #chat {
@@ -146,16 +148,16 @@ pre {
 }
 
 .arrow-down {
-    position: absolute;
-    bottom: -10px;
-    width: 0;
-    height: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid #a26363;
-    z-index: 0;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #a26363;
+  z-index: 0;
 }
 
 .dungeon0Door {
@@ -169,6 +171,7 @@ pre {
   top: 100px;
   left: calc(50% - 200px);
 }
+
 #door2 {
   top: 100px;
   left: calc(50% + 200px);
@@ -184,20 +187,22 @@ pre {
 
 #btnResizeConsole {
   position: absolute;
-  bottom: 120px;
+  bottom: 130px;
   left: 5px;
+  cursor: pointer;
+  z-index: 10;
 }
 
 #console {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    position: absolute;
-    bottom: 20px;
-    height: 100px;
-    width: 400px;
-    background-color: rgba(255, 255, 255, 0.8);
-    overflow: auto;
-    z-index: 10;
-    padding-left: 5px;
+  position: absolute;
+  bottom: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  height: 110px;
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow: auto;
+  z-index: 10;
+  padding-left: 5px;
 }
 
 .msgCons {

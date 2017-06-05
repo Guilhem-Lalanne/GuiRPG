@@ -5,9 +5,24 @@ class Dice {
 		this.nbFace = nbFace;
 	}
 
-	roll() {
-        var result = Math.floor((Math.random() * this.nbFace) + 1);
-        return result;
+	roll(explicite) {
+		let result; 
+		if (explicite !== undefined) {
+
+			let diceValue;
+			try {
+				diceValue = explicite.split('d');
+				result = Math.floor((Math.random() * diceValue[1]) + 1) * diceValue[0];
+				return result;
+
+			} catch (error) {
+				console.log('valeur incorrect : ' + error);
+				return false;
+			}
+		} else {
+			result = Math.floor((Math.random() * this.nbFace) + 1);
+			return result;
+		}
 	}
 }
 
@@ -28,13 +43,12 @@ class Player {
 		this.agility = agility;
 		this.defense = defense;
 		this.oAttackDice = new Dice(attackDice);
-        this.oDodgeDice = new Dice(dodgeDice);
+		this.oDodgeDice = new Dice(dodgeDice);
 	}
 
 	attack() {
-		console.log("paf");
 		var damage = Math.floor((Math.random() * this.oAttackDice.roll()) + this.strength);
-        return damage;
+		return damage;
 	}
 
 	eatVegetable(type) {
@@ -63,7 +77,6 @@ var Dice = require("./class/dice.js");
 var currentScene = null;
 var stopBulle = false;
 var firstSceneCompleted = 0;
-var uptake = 3;
 
 var upTakeCountdown = 2;
 
@@ -75,6 +88,20 @@ $(function () {
 
   $('#hp').html(oPlayer1.hp);
   $('#hpMax').html(oPlayer1.hpMax);
+
+  $('#overlayBlack').on('click', function () {
+    loadScene(0);
+    $(this).fadeOut("slow");
+  });
+
+  //debugui(0);
+  //pour debug
+  function debugui(levelId) {
+    loadScene(levelId);
+    $('body').removeClass('allBlack');
+    $("#statusBar").show();
+    $('#overlayBlack').hide();
+  }
 
   //BOUCLE DU JEU
   setInterval(function () {
@@ -90,16 +117,9 @@ $(function () {
         $("#uptake").fadeOut("slow");
       }
     }
+
   }, 1000);
   //END BOUCLE DU JEU
-
-  $('#overlayBlack').on('click', function() {
-    loadScene(0);
-    $(this).fadeOut("slow");
-  });
-
-  //pour debug
-  //$("#statusBar").fadeIn("slow", function () { });
 
   function loadScene(id) {
     $('.game').hide();
@@ -143,8 +163,7 @@ $(function () {
       printConsole("Ou est ce que je suis ?", function () {
         printConsole("Il fait noir ...", function () {
           printConsole("Qu'est ce qui se passe ?!!", function () {
-            printConsole("Je dois trouver l'interrupteur", function () {
-            });
+            printConsole("Je dois trouver l'interrupteur", function () {});
           });
         });
       });
@@ -171,16 +190,16 @@ $(function () {
 
       //ouvre la porte de la cage
       $('#jailKey').on('click', function () {
-          printConsole('Vous avez trouvé la clé de la cage', function () {
-            printConsole('Vous sortez de la cage');
-          });
-          $("#statusBar").fadeIn("slow");
-          $('#bonhomme').css('display', 'block');
-          $('#cage1').css('display', 'none');
-          $('#cage2').css('display', 'block');
-          $('#jailDoor').css('display', 'block');
-          $('#outJailDoor').css('display', 'block');
-          $('#jailKey').remove();
+        printConsole('Vous avez trouvé la clé de la cage', function () {
+          printConsole('Vous sortez de la cage');
+        });
+        $("#statusBar").fadeIn("slow");
+        $('#bonhomme').css('display', 'block');
+        $('#cage1').css('display', 'none');
+        $('#cage2').css('display', 'block');
+        $('#jailDoor').css('display', 'block');
+        $('#outJailDoor').css('display', 'block');
+        $('#jailKey').remove();
       });
 
       //sort du donjon
@@ -210,8 +229,13 @@ $(function () {
             printConsole('Vous vous echappez du donjon');
             loadScene(2);
           } else {
-            $('.dungeon0Door').animate({ opacity: '0' }, 'slow', function () {
-              $('.dungeon0Door').animate({ opacity: '1' }, 'fast');
+            printConsole("Ce n'est pas la bonne porte ..");
+            $('.dungeon0Door').animate({
+              opacity: '0'
+            }, 'slow', function () {
+              $('.dungeon0Door').animate({
+                opacity: '1'
+              }, 'fast');
             });
           }
         }
@@ -229,6 +253,7 @@ $(function () {
   }
   //END LEVEL2
 
+  //affiche/cache la console
   $('#btnResizeConsole').on('click', function () {
     $('#console').toggle();
     $('#btnResizeConsole').toggleClass('fa-minus fa-plus');
@@ -263,24 +288,32 @@ $(function () {
 
       if (nbMessage > 0) {
 
-        var bulleId = Math.floor(Math.random() * 1000 + 1);
+        //var bulleId = Math.floor(Math.random() * 1000 + 1);
 
-        var bulle = '<div id="' + bulleId + '" class="bulle">' + texteArray[0] + '<div class="arrow-down"></div></div>';
+        var bulle = '<div class="bulle">' + texteArray[0] + '<div class="arrow-down"></div></div>';
 
         //affiche la bulle à une position aleatoire
         $('.gameWindow').append(bulle);
 
         $('.bulle').last().css('position', 'absolute');
-        $('.bulle').last().css('left', Math.floor(Math.random() * $('.gameWindow').width() - 120 + 120));
-        $('.bulle').last().css('top', Math.floor(Math.random() * $('.gameWindow').height() - 240 + 220));
-        $('.bulle').last().animate({ opacity: '1' }, 'slow');
+
+        var maxWidth = $('.gameWindow').width() - $('.bulle').last().width();
+        var maxHeight = $('.gameWindow').height() - $('.bulle').last().height();
+
+        $('.bulle').last().css('left', Math.floor(Math.random() * maxWidth) + 1);
+        $('.bulle').last().css('top', Math.floor(Math.random() * maxHeight) + 1);
+        $('.bulle').last().animate({
+          opacity: '1'
+        }, 'slow');
 
         //supprime le 1er element du tableau
         texteArray.shift();
 
         //cache la bulle et rappel la function
         setTimeout(function () {
-          $('.bulle').last().animate({ opacity: '0' }, 'slow', function () {
+          $('.bulle').last().animate({
+            opacity: '0'
+          }, 'slow', function () {
             showDialog(texteArray, timeout);
           });
         }, timeout);
@@ -294,17 +327,24 @@ $(function () {
   var idMsgCons = 0;
 
   function printConsole(text, callback) {
+
     idMsgCons++;
     let current_id = idMsgCons;
+
     $('#console').prepend('<span id="msgCons' + current_id + '" class="msgCons"></span>');
+
+    //decoupe les lettres de la phrases
     var msgArray = [];
     for (var i = 0; i < text.length; i++) {
       msgArray[i] = text.charAt(i);
     }
+
     var j = 0;
+    //affiche une lettre chaque 50milisecond
     var print = setInterval(function () {
       $('#msgCons' + current_id).html($('#msgCons' + current_id).html() + msgArray[j]);
       j++;
+      //stop à la fin du texte
       if (j === text.length) {
         clearInterval(print);
         if (typeof callback === "function")
@@ -315,6 +355,7 @@ $(function () {
 
   function consumeEnergy(value) {
     var temp = oPlayer1.energy - value;
+    //verifie que l'energie n'est pas negatif
     if (temp >= 0) {
       upTakeCountdown = 3;
       oPlayer1.energy -= value;

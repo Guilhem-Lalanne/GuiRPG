@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/Guilhem-Lalanne/GuiRPG.svg?branch=master)](https://travis-ci.org/Guilhem-Lalanne/GuiRPG) [![codecov](https://codecov.io/gh/Guilhem-Lalanne/GuiRPG/branch/master/graph/badge.svg)](https://codecov.io/gh/Guilhem-Lalanne/GuiRPG)
 
 
-# GUIRPG v0.1.1
+# GUIRPG v0.1.2
 
 ### Créer le fichier bundle.js
 
